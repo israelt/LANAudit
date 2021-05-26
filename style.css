@@ -1,0 +1,65 @@
+/* formato de ajuste de texto para impresion */
+@page {
+        size: A4; /* Change from the default size of A4 */
+        margin: 2mm 0mm 5mm 0mm; /* Set margin on each page */
+      }
+/* formato de text estandar */
+body {
+    background-color: white;
+    text-align: justify;
+    width:95%;
+}
+/* formato de texto para titulo principal */
+h1 {
+    background-color: CornflowerBlue;
+    color: Whitesmoke;
+    padding-left: 10px;
+    font-size: 120%;
+}
+/* formato de texto para titulo de seccion */
+h2 {
+    background-color: CornflowerBlue;
+    color: Whitesmoke;
+    padding-left: 20px;
+    font-size: 80%;
+}
+/* formato de texto para datos de log */
+h3 {
+    padding-left: 40px;
+    font-size: 40%;
+    width:90%;
+    color: Chartreuse;
+    background-color: Gray;
+    text-align: justify;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+}
+/* formato de texto dentro de cada seccion */
+p {
+    font-size: 60%;
+    padding-left:40px;
+    text-align: justify;
+    width:95%;
+}
+/* formato de texto para tablas de datos */
+table {
+    padding-left:25px;
+    width:100%;
+}
+/* cabeceras de las tablas*/
+tr{
+    background-color: Black;
+    color: White;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 45%;
+}
+/* contenido de las tablas*/
+td {
+    background-color: Whitesmoke;
+    color: Black;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 80%;
+}
