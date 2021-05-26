@@ -784,7 +784,7 @@ def tr_logger(onlyname):
             <p>
                 LANAudit <br>
                 https://github.com/israelt/LANAudit <br> 
-                TFG UOC 2021 S2 <br>
+                TFG UOC 2020/2021 S2 <br>
                 Autor - Israel Torres <br>
                 Tutor - J. Ramon Esteban <br>
             </p>
