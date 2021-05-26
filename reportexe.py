@@ -781,6 +781,13 @@ def tr_logger(onlyname):
     html_str = """\
             <br>
             <h1>LANAudit - FIN DE REPORTE EJECUTIVO</h1>
+            <p>
+                LANAudit <br>
+                https://github.com/israelt/LANAudit <br> 
+                TFG UOC 2021 S2 <br>
+                Autor - Israel Torres <br>
+                Tutor - J. Ramon Esteban <br>
+            </p>
             <br>
         </body>
     </html>
