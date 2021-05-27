@@ -8,7 +8,7 @@ sudo apt -y upgrade
 echo INSTALANDO DHCPIG
 cd /opt
 sudo wget --trust-server-names -O master.zip https://github.com/secdev/scapy/archive/refs/tags/v2.3.3.zip
-sudo unzip master.zip
+sudo unzip master.zip -o
 cd scapy-2.3.3
 sudo python setup.py install
 cd /opt
