@@ -3,7 +3,7 @@ Herramienta para auditorías LAN
 
 ---
 
-##ADVERTENCIA
+## ADVERTENCIA
 Esta utilidad es una prueba de concepto para el **proyecto de fin de grado de la UOC 2020/2021 S2**. El creador de esta utilidad se exime de cualquier daño o perjuicio derivado de su uso incorrecto o su uso en redes en producción. Está orientada a la auditoría de redes y su uso se deberá limitar a redes de test o laboratorios virtuales.
 
 La instalación de la función de autoarranque **`enable_autostart.sh`** elimina cualquier otro servicio arrancado mediante el servicio **rc.local** y configura **LANAudit** para su arranque en cada inicio del sistema operativo. Por ello, se recomienda la instalación y el uso de LANAudit en un sistema operativo recién instalado y dedicado a esta tarea. 
