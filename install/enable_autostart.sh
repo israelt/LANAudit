@@ -18,7 +18,7 @@ echo [Install] >> /etc/systemd/system/rc-local.service
 echo  WantedBy=multi-user.target >> /etc/systemd/system/rc-local.service
 
 rm /etc/rc.local -rf
-printf '%s\n' '#!/bin/bash' 'sh /opt/LANAudit/autostart.sh' 'exit 0' | sudo tee -a /etc/rc.local
+printf '%s\n' '#!/bin/bash' 'sh /opt/lanaudit/lanaudit.sh' 'exit 0' | sudo tee -a /etc/rc.local
 
 sudo chmod +x /etc/rc.local
 

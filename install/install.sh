@@ -51,6 +51,6 @@ head -n100 rockyou.txt >> minrockyou.txt
 # INSTALANDO MODULO DE IMPRESION A PDF
 pip3 install weasyprint --no-input
 # CONFIGURANDO PERMISOS PARA LOS DEMAS SH
-sudo chmod +x /opt/LANAudit/autostart.sh
-sudo chmod +x /opt/LANAudit/install/enable_autostart.sh
-sudo chmod +x /opt/LANAudit/install/disable_autostart.sh
+sudo chmod +x /opt/lanaudit/lanaudit.sh
+sudo chmod +x /opt/lanaudit/install/enable_autostart.sh
+sudo chmod +x /opt/lanaudit/install/disable_autostart.sh
