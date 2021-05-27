@@ -254,30 +254,34 @@ def auditScan(ip, mask):
                 print('SCAN WEB: Escaner web del host HTTPS://' + i + ' finalizado correctamente')
                 logging.info('SCAN WEB: Escaner web del host HTTPS://' + i + ' finalizado correctamente')
     # Escaneo por fuerza bruta
-    services = ['21', '22', '23', '389', '445', '3306', '5900']
-    for i in services:
-        hosts.clear()
-        hosts = gethosts(dbname, interface, i, 'tcp')
-        if len(hosts) == 0:
-            print('SCAN BRUTEFORCE: No se encuentran servidores con puerto ' + i + ' a la escucha')
-            logging.info('SCAN BRUTEFORCE: No se encuentran servidores con puerto ' + i + ' a la escucha')
-        else:
-            for j in hosts:
-                print('SCAN BRUTEFORCE: Efectuando ataque bruteforce contra puerto ' + i + ' en IP ' + j)
-                logging.info('SCAN BRUTEFORCE: Efectuando ataque bruteforce contra puerto ' + i + ' en IP ' + j)
-                if bruteforce.scan(onlyname, j, i, brutefile, bruteonlycheck) == 0:
-                    print('SCAN BRUTEFORCE: Finalizado ataque bruteforce contra puerto ' + i + ' en IP ' + j)
-                    logging.info('SCAN BRUTEFORCE: Finalizado ataque bruteforce contra puerto ' + i + ' en IP ' + j)
-                else:
-                    print('SCAN BRUTEFORCE: Error en el ataque bruteforce contra puerto ' + i + ' en IP ' + j)
-                    logging.info('SCAN BRUTEFORCE: Error en el  ataque bruteforce contra puerto ' + i + ' en IP ' + j)
+    if brute == 1:
+        services = ['21', '22', '23', '389', '445', '3306', '5900']
+        for i in services:
+            hosts.clear()
+            hosts = gethosts(dbname, interface, i, 'tcp')
+            if len(hosts) == 0:
+                print('SCAN BRUTEFORCE: No se encuentran servidores con puerto ' + i + ' a la escucha')
+                logging.info('SCAN BRUTEFORCE: No se encuentran servidores con puerto ' + i + ' a la escucha')
+            else:
+                for j in hosts:
+                    print('SCAN BRUTEFORCE: Efectuando ataque bruteforce contra puerto ' + i + ' en IP ' + j)
+                    logging.info('SCAN BRUTEFORCE: Efectuando ataque bruteforce contra puerto ' + i + ' en IP ' + j)
+                    if bruteforce.scan(onlyname, j, i, brutefile, bruteonlycheck) == 0:
+                        print('SCAN BRUTEFORCE: Finalizado ataque bruteforce contra puerto ' + i + ' en IP ' + j)
+                        logging.info('SCAN BRUTEFORCE: Finalizado ataque bruteforce contra puerto ' + i + ' en IP ' + j)
+                    else:
+                        print('SCAN BRUTEFORCE: Error en el ataque bruteforce contra puerto ' + i + ' en IP ' + j)
+                        logging.info('SCAN BRUTEFORCE: Error en el  ataque bruteforce contra puerto ' + i + ' en IP ' + j)
+    else:
+        print('SCAN BRUTEFORCE: Escaneo de ataques de fuerza bruta desactivado')
+        logging.info('SCAN BRUTEFORCE: Escaneo de ataques de fuerza bruta desactivado')
     # Fin de escaneos
     print('SCAN END: Se han finalizado los escaneres de vulnerabilidades')
     logging.info('SCAN END: Se han finalizado los escaneres de vulnerabilidades')
     # Generando reporte ejecutivo
     print('REPORTES: Iniciando reporte ejecutivo')
     logging.info('REPORTES: Iniciando reporte ejecutivo')
-    if reportexe.do(onlyname) == 0:
+    if reportexe.do(onlyname, brute) == 0:
         print('REPORTES: Reporte ejecutivo fizalizado')
         logging.info('REPORTES: Reporte ejecutivo fizalizado')
     else:
@@ -286,7 +290,7 @@ def auditScan(ip, mask):
     # Generando reporte tecnico
     print('REPORTES: Iniciando reporte tecnico')
     logging.info('REPORTES: Iniciando reporte tecnico')
-    if reporttec.do(onlyname) == 0:
+    if reporttec.do(onlyname, brute) == 0:
         print('REPORTES: Reporte tecnico fizalizado')
         logging.info('REPORTES: Reporte tecnico fizalizado')
     else:

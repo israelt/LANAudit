@@ -801,7 +801,7 @@ def tr_print(onlyname):
     cmd = 'weasyprint ' + htmlfile + ' ' + pdffile + ' -p'
     os.system(cmd)
 
-def do(onlyname):
+def do(onlyname, brute = '1'):
     tr_ipconfig(onlyname)
     tr_nmap(onlyname)
     tr_dhcp(onlyname)
@@ -813,7 +813,8 @@ def do(onlyname):
     tr_smtp(onlyname)
     tr_guest(onlyname)
     tr_web(onlyname)
-    tr_brute(onlyname)
+    if brute == 1:
+        tr_brute(onlyname)
     tr_logger(onlyname)
     tr_print(onlyname)
     return 0
