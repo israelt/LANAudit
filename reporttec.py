@@ -49,9 +49,10 @@ def tr_ipconfig(onlyname):
     date = correctdate(onlyname)
     now = datetime.now()
     nowdate = now.strftime("%d/%m/%Y a las %H:%M")
+    osname = (os.uname()[2])
+    # Se consulta base de datos SQLITE
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
-    # Se consulta base de datos SQLITE
     cursor.execute("SELECT ip, mask, interface, mode, bruteforce, bonlycheck from config")
     ipconfig = cursor.fetchone()
     connection.close()
@@ -78,6 +79,7 @@ def tr_ipconfig(onlyname):
             <h1>LANAudit - REPORTE TÉCNICO</h1>
             <p><b>Auditoría realizada el {date} (Inicio de la auditoría)</b></p>
             <p><b>Reporte realizado el {nowdate}</b></p>
+            <p><b>Reporte realizado con sistema operativo {osname}</b></p>
             <br>
             <h2>CONFIGURACIÓN INICIAL DE LA AUDITORÍA</h2>
             <p>
@@ -88,7 +90,7 @@ def tr_ipconfig(onlyname):
                 Modo Fuerza Bruta / Número de pruebas limitado: {bruteonlycheck}<br>
             </p>
             <br>
-    """.format(date=date, nowdate=nowdate, interface=interface, mode=mode, ip=ip, mask=mask, brute=brute,
+    """.format(date=date, nowdate=nowdate, osname=osname, interface=interface, mode=mode, ip=ip, mask=mask, brute=brute,
                bruteonlycheck=bruteonlycheck)
     html_file = open(htmlfile, "w")
     html_file.write(html_str)
