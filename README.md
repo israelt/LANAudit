@@ -85,7 +85,7 @@ Define la interfaz de red que se utilizará para realizar la auditoría.
 <h4>IP = 172.26.0.1</h4>
 Define la dirección IP que se configurará en la interfaz para **Mode = static**
 
-Mask = 255.255.255.0</h4>
+<h4>Mask = 255.255.255.0</h4>
 Define la máscara de red que se configurará en la interfaz para **Mode = static**
 
 
