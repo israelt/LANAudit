@@ -7,7 +7,7 @@
 ---
 
 ## ADVERTENCIA
-Esta utilidad es una prueba de concepto para el **proyecto de fin de grado de la UOC 2020/2021 S2**. El creador de esta utilidad se exime de cualquier daño o perjuicio derivado de su uso incorrecto o su uso en redes en producción. Está orientada a la auditoría de redes y su uso se deberá limitar a redes de test o laboratorios virtuales.
+Esta utilidad pertenece al **proyecto de fin de grado de la UOC 2020/2021 S2**. El creador de esta utilidad se exime de cualquier daño o perjuicio derivado de su uso incorrecto o su uso en redes en producción. Está orientada a la auditoría de redes y su uso se deberá limitar a redes de test o laboratorios virtuales.
 
 La instalación de la función de auto-arranque `enable_autostart.sh` elimina cualquier otro servicio arrancado mediante el servicio `rc.local` y configura **LANAudit** para su arranque en cada inicio del sistema operativo. Por ello, se recomienda la instalación y el uso de **LANAudit** en un sistema operativo recién instalado y dedicado a esta tarea. 
 
@@ -55,7 +55,13 @@ sh ./install.sh
 
 Para lanzar un escaneo con la configuración por defecto se ejecuta el script `/opt/lanaudit/lanaudit.sh`
 
-Se recomienda revisar la configuración del archivo `lanaudit.ini` y la sección de [CONFIGURACIÓN](#CONFIGURACIÓN) de este **README.md** antes de ejecutar un escaneo de la red. 
+Se recomienda revisar la configuración del archivo `lanaudit.ini` y la sección de [CONFIGURACIÓN](#CONFIGURACIÓN) de este **README.md** antes de ejecutar un escaneo de la red.
+
+Una vez finalizado el proceso de auditoría se pueden encontrar los ficheros de evidencias en la ruta: `/opt/lanaudit/audits`
+
+Los ficheros de evidencias resumen son los reportes ejecutivos y técnicos en formato *PDF*
+
+El fichero de registro (*log*) de todo el proceso y los registros de cada escáner se encuentran en el mismo directorio y extensión *.log*
 
 ---
 

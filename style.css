@@ -47,7 +47,7 @@ table {
     padding-left:25px;
     width:100%;
 }
-/* cabeceras de las tablas*/
+/* cabeceras de las tablas */
 tr{
     background-color: Black;
     color: White;
@@ -55,11 +55,16 @@ tr{
     vertical-align: middle;
     font-size: 45%;
 }
-/* contenido de las tablas*/
+/* contenido de las tablas */
 td {
     background-color: Whitesmoke;
     color: Black;
     text-align: center;
     vertical-align: middle;
     font-size: 80%;
+}
+/* formato de la imagen de logo */
+img {
+    height: 200px;
+    width: auto;
 }
