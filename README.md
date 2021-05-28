@@ -4,6 +4,8 @@
 
 ---
 
+---
+
 ## ADVERTENCIA
 Esta utilidad es una prueba de concepto para el **proyecto de fin de grado de la UOC 2020/2021 S2**. El creador de esta utilidad se exime de cualquier daño o perjuicio derivado de su uso incorrecto o su uso en redes en producción. Está orientada a la auditoría de redes y su uso se deberá limitar a redes de test o laboratorios virtuales.
 
@@ -13,11 +15,14 @@ No se debe instalar **LANAudit** en sistemas operativos Linux dedicados a tareas
 
 ---
 
+---
+
 ## REQUERIMIENTOS
 - KALI Linux 2021.1 Release (https://www.kali.org/downloads/)
 
 Versiones de 32 y 64 bits para funcionalidades completas y versiones ARM para funcionalidades limitadas: sin escáner de vulnerabilidades WEB.
 
+---
 
 ## INSTALACIÓN
 
@@ -44,6 +49,7 @@ git clone http://github.com/israelt/lanaudit.git
 cd /opt/lanaudit/install
 sh ./install.sh
 ```
+---
 
 ## USO
 
@@ -51,6 +57,7 @@ Para lanzar un escaneo con la configuración por defecto se ejecuta el script `/
 
 Se recomienda revisar la configuración del archivo `lanaudit.ini` y la sección de [CONFIGURACIÓN](#CONFIGURACIÓN) de este **README.md** antes de ejecutar un escaneo de la red. 
 
+---
 
 ## CONFIGURACIÓN
 La configuración del escáner se debe establecer antes de su ejecución mediante el fichero: `/opt/lanaudit/lanaudit.sh`
@@ -73,8 +80,6 @@ OnlyCheck = 1
 UserFile = ./usernames.list
 PowerOff = 0
 ```
-
----
 
 A continuación se detallan los parámetros que se pueden definir en este fichero de configuración:
 
@@ -122,16 +127,17 @@ IPRange5 = 172.26.30.1/255.255.255.0
 
 <h4>OnlyCheck = 1</h4>
 
->Si se activa el ataque por fuerza bruta solo se realizará con 100 contraseñas por usuario. Útil si se desea comprobar que el sistema es vulnerable a este tipo de ataques, pero no es necesario conseguir la contraseña, lo que elevaría el tiempo de ejecución
+>Si se activa el ataque por fuerza bruta solo se realizará con 100 contraseñas por usuario. Es útil si se desea comprobar que el sistema es vulnerable a este tipo de ataques, pero no es necesario conseguir la contraseña, lo que elevaría el tiempo de ejecución
 
 <h4>PowerOff = 0</h4>
 
->Si se configura a 1 apaga el sistema cuando finaliza la auditoría, en caso contrario al finalizar la auditoría no se realizaría ninguna acción 
+>Si se configura a 1 apaga el sistema cuando finaliza la auditoría, en caso contrario al finalizar la auditoría no se realizará ninguna acción 
 
 <h4>UserFile = ./usernames.list</h4>
 
->Define el diccionario de nombres de usuario a utilizar en los ataques de fuerza bruta. El diccionario de contraseñas es siempre ***rockyou*** `/usr/share/wordlists/rockyou.txt`o su versión generada de 100 registros si **OnlyCheck = 1**
+>Define el diccionario de nombres de usuario a utilizar en los ataques de fuerza bruta. El diccionario de contraseñas es siempre ***rockyou*** `/usr/share/wordlists/rockyou.txt` o su versión generada de 100 registros si **OnlyCheck = 1**
 
+---
 
 ## AUTO-ARRANQUE
 La instalación de la función de auto-arranque `enable_autostart.sh` elimina cualquier otro servicio arrancado mediante el servicio `rc.local` y configura **LANAudit** para su arranque en cada inicio del sistema operativo. Por ello, se recomienda la instalación y el uso de **LANAudit** en un sistema operativo recién instalado y dedicado a esta tarea.
@@ -147,10 +153,14 @@ Para desinstalar la función de auto-arranque se debe ejecutar con permisos de *
 
 `/opt/lanaudit/install/disable_autostart.sh`
 
+---
+
 ## LICENCIA Y RECURSOS UTILIZADOS
 
 **LANAudit** está desarrollado bajo licencia **CreativeCommons Reconocimiento-NoComercial-SinObraDerivada 3.0 España** (CC BY-NC-ND 3.0 ES) (https://creativecommons.org/licenses/by-nc-nd/3.0/es/)
 
-El código utilizado en los módulos Python (.py) de este proyecto es de desarrollo propio del creador a excepción del módulo `nmaptocsv.py` el cual pertenece a Thomas Debize <tdebize at mail.com> (https://github.com/maaaaz/nmaptocsv)
+El código utilizado en los módulos Python (.py) de este proyecto es desarrollo propio del creador a excepción del módulo `nmaptocsv.py` el cual pertenece a Thomas Debize <tdebize at mail.com> (https://github.com/maaaaz/nmaptocsv)
 
 El logotipo de LANAudit ha sido creado con la herramienta gratuita Hatchful de Shopify (https://hatchful.shopify.com/)
+
+---
