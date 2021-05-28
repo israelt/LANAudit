@@ -80,7 +80,7 @@ def tr_ipconfig(onlyname):
             <h1>REPORTE TÉCNICO</h1>
             <p><b>Auditoría realizada el {date} (Inicio de la auditoría)</b></p>
             <p><b>Reporte realizado el {nowdate}</b></p>
-            <p><b>Reporte realizado con sistema operativo {osname}</b></p>
+            <p><b>Reporte realizado con sistema operativo: {osname}</b></p>
             <br>
             <h2>CONFIGURACIÓN INICIAL DE LA AUDITORÍA</h2>
             <p>
