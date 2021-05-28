@@ -74,6 +74,8 @@ UserFile = ./usernames.list
 PowerOff = 0
 ```
 
+---
+
 A continuación se detallan los parámetros que se pueden definir en este fichero de configuración:
 
 <h3>[NETCONFIG]</h3>
@@ -102,7 +104,9 @@ IPRange3 = 172.26.10.1/255.255.255.0
 IPRange4 = 172.26.20.1/255.255.255.0
 
 IPRange5 = 172.26.30.1/255.255.255.0
+
 </h4>
+
 >Es la configuración IP a utilizar cuando `Mode = auto` y no sea posible obtener una dirección IP con conectividad por DHCP. Se configurará en orden secuencial hasta que el sistema tenga conectividad o se finalice la lista, lo que generará un error de aplicación.
 
 <h3>[BRUTEFORCE]</h3>
@@ -110,7 +114,7 @@ IPRange5 = 172.26.30.1/255.255.255.0
 >Indica que la auditoría debe intentar el ataque por fuerza bruta a los puertos TCP: 21(FTP), 22(SSH), 23(TELNET), 389(LDAP), 445(SMB), 3306(MYSQL) y 5900(VNC) 
 
 <h4>OnlyCheck = 1</h4>
->Si se activa el ataque por fuerza bruta sólo se realizará con 100 contraseñas por usuario. Útil si se desea comprobar que el sistema es vulnerable a este tipo de ataques, pero no es necesario conseguir la contraseña, lo que elevaría el tiempo de ejecución
+>Si se activa el ataque por fuerza bruta solo se realizará con 100 contraseñas por usuario. Útil si se desea comprobar que el sistema es vulnerable a este tipo de ataques, pero no es necesario conseguir la contraseña, lo que elevaría el tiempo de ejecución
 
 <h4>PowerOff = 0</h4>
 >Si se configura a 1 apaga el sistema cuando finaliza la auditoría, en caso contrario al finalizar la auditoría no se realizaría ninguna acción 
