@@ -165,7 +165,23 @@ Para desinstalar la función de auto-arranque se debe ejecutar con permisos de *
 
 **LANAudit** está desarrollado bajo licencia **CreativeCommons Reconocimiento-NoComercial-SinObraDerivada 3.0 España** (CC BY-NC-ND 3.0 ES) (https://creativecommons.org/licenses/by-nc-nd/3.0/es/)
 
-**LANAudit** utiliza diferentes herramientas y utilidades libre disponibles para **KALI Linux** 
+**LANAudit** utiliza diferentes herramientas y utilidades libres disponibles para **KALI Linux** y **DEBIAN Linux** como:
+
+- Nmap
+  
+- Hydra
+  
+- Nbtscan-unixwiz 
+
+- Weasyprint
+
+- DHCPig
+
+- Impacket
+
+- Snmp-check
+
+- Arachni
 
 El código utilizado en los módulos Python (.py) de este proyecto es desarrollo propio del creador a excepción del módulo `nmaptocsv.py` el cual pertenece a Thomas Debize <tdebize at mail.com> (https://github.com/maaaaz/nmaptocsv)
 
