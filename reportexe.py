@@ -56,7 +56,7 @@ def tr_ipconfig(onlyname):
             <link rel="stylesheet" href="./../style.css">
         </head>
         <body>
-            <img src="lanaudit.png" alt="LANAudit Logo">
+            <img src="./../lanaudit.png" alt="LANAudit Logo">
             <h1>LANAudit - REPORTE EJECUTIVO</h1>
             <p><b>Auditoría realizada el {date} (Inicio de la auditoría)</b></p>
             <p><b>Reporte realizado el {nowdate}</b></p>
