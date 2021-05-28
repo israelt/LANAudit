@@ -1,12 +1,13 @@
 # LANAudit
-Herramienta para auditorías LAN
+![LANAudit](lanaudit.png)
+<h2>Herramienta para auditorías LAN<h2>
 
 ---
 
 ## ADVERTENCIA
 Esta utilidad es una prueba de concepto para el **proyecto de fin de grado de la UOC 2020/2021 S2**. El creador de esta utilidad se exime de cualquier daño o perjuicio derivado de su uso incorrecto o su uso en redes en producción. Está orientada a la auditoría de redes y su uso se deberá limitar a redes de test o laboratorios virtuales.
 
-La instalación de la función de autoarranque **`enable_autostart.sh`** elimina cualquier otro servicio arrancado mediante el servicio **rc.local** y configura **LANAudit** para su arranque en cada inicio del sistema operativo. Por ello, se recomienda la instalación y el uso de LANAudit en un sistema operativo recién instalado y dedicado a esta tarea. 
+La instalación de la función de auto-arranque **`enable_autostart.sh`** elimina cualquier otro servicio arrancado mediante el servicio **rc.local** y configura **LANAudit** para su arranque en cada inicio del sistema operativo. Por ello, se recomienda la instalación y el uso de LANAudit en un sistema operativo recién instalado y dedicado a esta tarea. 
 
 No se debe instalar **LANAudit** en sistemas operativos Linux dedicados a tareas de escritorio o servidores. Se recomienda el uso dedicado de un sistema operativo/máquina para el uso de **LANAudit**
 
@@ -70,10 +71,19 @@ UserFile = ./usernames.list
 PowerOff = 0
 ```
 
-## AUTOARRANQUE
-En proceso[...]
+## AUTO-ARRANQUE
+La instalación de la función de auto-arranque enable_autostart.sh elimina cualquier otro servicio arrancado mediante el servicio rc.local y configura LANAudit para su arranque en cada inicio del sistema operativo. Por ello, se recomienda la instalación y el uso de LANAudit en un sistema operativo recién instalado y dedicado a esta tarea.
+
+Para instalar la función de auto-arranque se debe ejecutar con permisos de **root** el siguiente script en el subdirectorio de la instalación de LANAudit:
 
 `/opt/lanaudit/install/enable_autostart.sh`
 
+Si reiniciamos el sistema operativo tras esta instalación se iniciará de forma automática el escáner con los parámetros definidos en el fichero `lanaudit.ini` 
+
+
+Para desinstalar la función de auto-arranque se debe ejecutar con permisos de **root** el siguiente script en el subdirectorio de la instalación de LANAudit:
+
 `/opt/lanaudit/install/disable_autostart.sh`
+
+## LICENCIA Y RECURSOS UTILIZADOS
 
