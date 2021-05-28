@@ -73,7 +73,7 @@ PowerOff = 0
 Los siguientes parámetros se pueden definir en este fichero de configuración:
 
 <h3>[NETCONFIG]</h3>
-<h4>`Mode = auto`</h4>
+<h4>Mode = auto</h4>
 
 Admite las opciones ***auto*** y ***static***
 -	***static***: el sistema configura la interfaz de red seleccionada con la IP y la máscara de red que aparecen en este fichero de configuración. 
