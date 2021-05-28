@@ -91,9 +91,13 @@ Define la máscara de red que se configurará en la interfaz para **Mode = stati
 
 <h4>
 IPRange1 = 10.10.20.10/255.255.255.0
+
 IPRange2 = 172.26.0.111/255.255.255.0
+
 IPRange3 = 172.26.10.1/255.255.255.0
+
 IPRange4 = 172.26.20.1/255.255.255.0
+
 IPRange5 = 172.26.30.1/255.255.255.0
 </h4>
 
