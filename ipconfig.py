@@ -10,7 +10,8 @@ import struct
 import sqlite3
 import os
 
-# Lee la configuracion IP de un interfaz para asegurar que tiene una IP asignada
+
+# Lee la configuration IP de un interfaz para asegurar que tiene una IP asignada
 def getLocalIP(interface='eth0'):
     try:
         opensocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -33,6 +34,7 @@ def getLocalMask(interface='eth0'):
         opensocket.close()
     except OSError:
         return -1
+
 
 # Configura una interfaz de red por DHCP o por IP Fija
 def ipConfig(ip, interface='eth0', mask='255.255.255.0'):
@@ -62,8 +64,9 @@ def ipConfig(ip, interface='eth0', mask='255.255.255.0'):
     ip = (getLocalIP(interface))
     return ip
 
+
 def saveConfig(onlyname, ip, mask, interface, mode, bruteforce, bonlycheck, buserfile):
-    # Se insertan los datos en la BBDD
+    # Se insertan los datos en la base de datos
     scriptdir = (os.path.dirname(os.path.realpath(__file__)))
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     connection = sqlite3.connect(dbname)

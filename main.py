@@ -24,13 +24,14 @@ import bruteforce
 import reporttec
 import reportexe
 
+
 ### FUNCIONES ###
 
 # Define el nombre y el formato de los ficheros de logs
 def initLog(logFile):
     logging.basicConfig(
         format='%(asctime)s %(levelname)-8s %(message)s',
-        #level=logging.INFO,
+        # level=logging.INFO,
         level=logging.DEBUG,
         datefmt='%Y-%m-%d %H:%M:%S',
         filename=logFile,
@@ -38,12 +39,14 @@ def initLog(logFile):
 
     logging.info("LOGGER: Inicio de LOG")
 
-# Funcion para cambio de representacion de mascara de red a cidr
-def mask_cidr(mask):
-  return(sum([ bin(int(bits)).count("1") for bits in mask.split(".") ]))
 
-# Funcion para guardar los host descubiertos en NMAP en una lista
-def gethosts(dbname, interface = 'eth0', port='all', protocol='tcp'):
+# Función para cambio de representación de máscara de red a cidr
+def mask_cidr(mask):
+    return (sum([bin(int(bits)).count("1") for bits in mask.split(".")]))
+
+
+# Función para guardar los hosts descubiertos en NMAP en una lista
+def gethosts(dbname, interface='eth0', port='all', protocol='tcp'):
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
     if port == 'all':
@@ -57,12 +60,13 @@ def gethosts(dbname, interface = 'eth0', port='all', protocol='tcp'):
         hosts.remove(mylocalip)
     return hosts
 
-# Especifica la configuracion por rangos
+
+# Especifica la configuración por rangos
 def rangeConf():
     audit = 0
     totalranges = readini.manyRanges()
     totalranges = int(totalranges)
-    totalranges = totalranges +1
+    totalranges = totalranges + 1
     if totalranges == 0:
         logging.info("EXIT: No hay rangos configurados pruebe con otra configuracion IP")
         raise SystemExit('Error: No hay rangos configurados pruebe con otra configuracion IP')
@@ -89,14 +93,15 @@ def rangeConf():
         logging.info("EXIT: No hay conectividad con la configuracion de ningun rango")
         raise SystemExit('Error: No hay conectividad con la configuracion de ningun rango')
     else:
-        # Se lanza funcion de auditoria con IP descubierta por RANGOS
+        # Se lanza función de auditoria con IP descubierta por RANGOS
         auditScan(searchip, mask)
+
 
 # Auditoria Escaneo de IP
 def auditScan(ip, mask):
     # Se convierte la mascara al formato CIDR
     mask = str(mask_cidr(mask))
-    # Se guarda la configuracion como registro en la bd
+    # Se guarda la configuración como registro en la bd
     ipconfig.saveConfig(onlyname, ip, mask, interface, mode, brute, bruteonlycheck, brutefile)
     print('Lanzando NMAP con IP ' + ip + ' a rango de red ' + mask)
     logging.info('SCAN: Lanzando NMAP con IP ' + ip + ' a rango de red ' + mask)
@@ -112,7 +117,7 @@ def auditScan(ip, mask):
     else:
         logging.info('ERROR: Error en proceso AuditScan')
         raise SystemExit('Error: Error en proceso AuditScan')
-    # Iniciando modulos encargados de escaneos a peticion
+    # Iniciando módulos encargados de escaneos a petición
     # Escaneando DHCP
     print('SCAN DHCP: Escaneando vulnerabilidades DHCP')
     logging.info('SCAN DHCP: Escaneando vulnerabilidades DHCP')
@@ -271,7 +276,8 @@ def auditScan(ip, mask):
                         logging.info('SCAN BRUTEFORCE: Finalizado ataque bruteforce contra puerto ' + i + ' en IP ' + j)
                     else:
                         print('SCAN BRUTEFORCE: Error en el ataque bruteforce contra puerto ' + i + ' en IP ' + j)
-                        logging.info('SCAN BRUTEFORCE: Error en el  ataque bruteforce contra puerto ' + i + ' en IP ' + j)
+                        logging.info(
+                            'SCAN BRUTEFORCE: Error en el  ataque bruteforce contra puerto ' + i + ' en IP ' + j)
     else:
         print('SCAN BRUTEFORCE: Escaneo de ataques de fuerza bruta desactivado')
         logging.info('SCAN BRUTEFORCE: Escaneo de ataques de fuerza bruta desactivado')
@@ -287,7 +293,7 @@ def auditScan(ip, mask):
     else:
         print('REPORTES ERROR: Error en la generación del reporte ejecutivo')
         logging.info('REPORTES ERROR: Error en la generación del reporte ejecutivo')
-    # Generando reporte tecnico
+    # Generando reporte técnico
     print('REPORTES: Iniciando reporte tecnico')
     logging.info('REPORTES: Iniciando reporte tecnico')
     if reporttec.do(onlyname, brute) == 0:
@@ -302,7 +308,7 @@ def auditScan(ip, mask):
 
 ### EJECUCION ###
 
-# Configura el nombre de los ficheros de analisis utilizando la fecha y hora para evitar duplicados y dejar evidencia
+# Configura el nombre de los ficheros de análisis utilizando la fecha y hora para evitar duplicados y dejar evidencia
 path = "./audits"
 try:
     os.mkdir(path)
@@ -317,7 +323,7 @@ logname = './audits/' + now.strftime("%Y%m%d_%H%M%S") + '.log'
 # Se inicia el log
 initLog(logname)
 
-# Se lee el fichero de configuracion
+# Se lee el fichero de configuración
 interface = 'eth0'
 mode = 'auto'
 brute = '0'
@@ -354,18 +360,18 @@ if mode == 'auto':
             logging.info("IP: La IP asignada tiene conectividad")
             mask = ipconfig.getLocalMask(interface)
             logging.info("SCAN: Iniciando auditoria con IP " + myip + " y mascara " + mask)
-            # Se lanza funcion de auditoria con IP DHCP
+            # Se lanza función de auditoria con IP DHCP
             auditScan(myip, mask)
         else:
             logging.info("IP: La IP asignada NO tiene conectividad")
             logging.info("IP: Se inicia busqueda por rangos")
-            # Se intenta configuracion sin IP fija ni DHCP por rangos de IP en fichero ini
+            # Se intenta configuración sin IP fija ni DHCP por rangos de IP en fichero ini
             rangeConf()
     else:
         print('No se asigna IP')
         logging.info("IP: DHCP NO asignada IP")
         logging.info("IP: Se inicia busqueda por rangos")
-        # Se intenta configuracion sin IP fija ni DHCP por rangos de IP en fichero ini
+        # Se intenta configuración sin IP fija ni DHCP por rangos de IP en fichero ini
         rangeConf()
 
 # Proceso IP ESTATICA
@@ -383,7 +389,7 @@ if mode == 'static':
             print(myip)
             logging.info("IP: La IP asignada manualmente tiene conectividad")
             logging.info("SCAN: Iniciando Auditoria de la red")
-            # Se lanza funcion de auditoria con IP FIJA
+            # Se lanza función de auditoria con IP FIJA
             auditScan(ip, mask)
         else:
             logging.info("IP: La IP asignada manualmente NO tiene conectividad")

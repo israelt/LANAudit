@@ -4,37 +4,37 @@
 
 import sqlite3
 
-def maintables(dbname):
 
+def maintables(dbname):
     # Se crean las tablas de datos necesarias para los distintos escaneres
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
-    cursor.execute("CREATE TABLE IF NOT EXISTS ipsearch("+
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                    "ip varchar(15),"+
-                    "mac varchar(17)"+
-                    ")")
+    cursor.execute("CREATE TABLE IF NOT EXISTS ipsearch(" +
+                   "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                   "ip varchar(15)," +
+                   "mac varchar(17)" +
+                   ")")
     connection.commit()
-    cursor.execute("CREATE TABLE IF NOT EXISTS config("+
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                    "ip varchar(15),"+
-                    "mask varchar(15),"+
-                    "interface varchar(12)," +
-                    "mode varchar(4)," +
-                    "bruteforce varchar(2)," +
-                    "bonlycheck varchar(2)," +
-                    "buserfile varchar(255)" +
-                    ")")
+    cursor.execute("CREATE TABLE IF NOT EXISTS config(" +
+                   "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                   "ip varchar(15)," +
+                   "mask varchar(15)," +
+                   "interface varchar(12)," +
+                   "mode varchar(4)," +
+                   "bruteforce varchar(2)," +
+                   "bonlycheck varchar(2)," +
+                   "buserfile varchar(255)" +
+                   ")")
     connection.commit()
-    cursor.execute("CREATE TABLE IF NOT EXISTS nmap("+
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                    "ip varchar(15),"+
-                    "os varchar(100),"+
-                    "protocol varchar(5),"+
-                    "port int(5),"+
-                    "service varchar(20),"+
-                    "version varchar(255)"+
-                    ")")
+    cursor.execute("CREATE TABLE IF NOT EXISTS nmap(" +
+                   "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                   "ip varchar(15)," +
+                   "os varchar(100)," +
+                   "protocol varchar(5)," +
+                   "port int(5)," +
+                   "service varchar(20)," +
+                   "version varchar(255)" +
+                   ")")
     connection.commit()
     cursor.execute("CREATE TABLE IF NOT EXISTS dhcp(" +
                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -117,4 +117,5 @@ def maintables(dbname):
                    ")")
     connection.commit()
     connection.close()
+
     return 0

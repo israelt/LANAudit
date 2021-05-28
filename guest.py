@@ -10,8 +10,9 @@ import sqlite3
 
 scriptdir = (os.path.dirname(os.path.realpath(__file__)))
 
+
 def scan(onlyname, ip):
-    # Se definen los parametros y variables iniciales y se abren los ficheros de log y errores necesarios
+    # Se definen los parámetros y variables iniciales y se abren los ficheros de log y errores necesarios
     vulnerable = 0
     if os.path.isfile(scriptdir + '/audits/' + onlyname + '.guest.error'):
         os.remove(scriptdir + '/audits/' + onlyname + '.guest.error')
@@ -38,7 +39,8 @@ def scan(onlyname, ip):
             if 'Anonymous success' in output:
                 openlogfile.close()
                 vulnerable = 1
-                copyfile(scriptdir + '/audits/' + onlyname + '.guest.error', scriptdir + '/audits/' + onlyname + '.guest_' + ip + '.log')
+                copyfile(scriptdir + '/audits/' + onlyname + '.guest.error',
+                         scriptdir + '/audits/' + onlyname + '.guest_' + ip + '.log')
                 os.remove(scriptdir + '/audits/' + onlyname + '.guest.error')
                 break
 

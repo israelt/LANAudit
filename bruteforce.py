@@ -9,8 +9,9 @@ import sqlite3
 
 scriptdir = (os.path.dirname(os.path.realpath(__file__)))
 
+
 def scan(onlyname, ip, port, userfile, onlycheck='1'):
-    # Se define el servicio por el numero de puerto abierto a escanear
+    # Se define el servicio por el número de puerto abierto a escanear
     service = 'unknow'
     if port == '21': service = 'ftp://'
     if port == '22': service = 'ssh://'
@@ -25,7 +26,7 @@ def scan(onlyname, ip, port, userfile, onlycheck='1'):
     if onlycheck == '0': passfile = '/usr/share/wordlists/rockyou.txt'
     if onlycheck == '1': passfile = '/usr/share/wordlists/minrockyou.txt'
 
-    # Se definen los parametros y variables iniciales y se abren los ficheros de log y errores necesarios
+    # Se definen los parámetros y variables iniciales y se abren los ficheros de log y errores necesarios
     logfile = open(scriptdir + '/audits/' + onlyname + '.bruteforce_' + ip + '_port' + port + '.log', 'w+')
     errorfile = open(scriptdir + '/audits/' + onlyname + '.bruteforce_' + ip + '_port' + port + '.error.log', 'w+')
 

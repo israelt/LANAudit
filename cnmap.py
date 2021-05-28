@@ -5,8 +5,9 @@
 from shlex import split
 import subprocess
 
+
 def portscan(hosts, ports='', arguments='', logname='cnmap'):
-    #Se formatean correctamente los argumentos
+    # Se formatean correctamente los argumentos
     if ports == '':
         ports = ' '
     else:
@@ -14,10 +15,9 @@ def portscan(hosts, ports='', arguments='', logname='cnmap'):
 
     logname = ' -oA ' + logname + ' '
 
-    #Se prepara la cadena de comandos a ejecutar
+    # Se prepara la cadena de comandos a ejecutar
     commandraw = ('sudo /usr/bin/nmap' + ports + hosts + logname + arguments)
     command = split(commandraw)
-    #print(command)
     p = subprocess.Popen(command, bufsize=100000,
                          stdin=subprocess.PIPE,
                          stdout=subprocess.PIPE,
