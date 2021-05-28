@@ -112,15 +112,15 @@ A continuación se detallan los parámetros que se pueden definir en este ficher
 
 <h4>
 
-IPRange1 = 10.10.20.10/255.255.255.0
+IPRange1 = 10.0.0.1/255.255.255.0
 
-IPRange2 = 172.26.0.111/255.255.255.0
+IPRange2 = 10.10.10.1/255.255.255.0
 
-IPRange3 = 172.26.10.1/255.255.255.0
+IPRange3 = 192.168.0.1/255.255.255.0
 
-IPRange4 = 172.26.20.1/255.255.255.0
+IPRange4 = 172.26.0.1/255.255.255.0
 
-IPRange5 = 172.26.30.1/255.255.255.0
+IPRange5 = 172.26.10.1/255.255.255.0
 
 </h4>
 
@@ -164,6 +164,8 @@ Para desinstalar la función de auto-arranque se debe ejecutar con permisos de *
 ## LICENCIA Y RECURSOS UTILIZADOS
 
 **LANAudit** está desarrollado bajo licencia **CreativeCommons Reconocimiento-NoComercial-SinObraDerivada 3.0 España** (CC BY-NC-ND 3.0 ES) (https://creativecommons.org/licenses/by-nc-nd/3.0/es/)
+
+**LANAudit** utiliza diferentes herramientas y utilidades libre disponibles para **KALI Linux** 
 
 El código utilizado en los módulos Python (.py) de este proyecto es desarrollo propio del creador a excepción del módulo `nmaptocsv.py` el cual pertenece a Thomas Debize <tdebize at mail.com> (https://github.com/maaaaz/nmaptocsv)
 
