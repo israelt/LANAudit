@@ -12,19 +12,22 @@ try:
 except IOError:
     raise SystemExit('Error: Error al acceder o leer el fichero de configuracion <lanaudit.ini>')
 
+
 def readConfig(myVar):
-    return (config['NETCONFIG'][myVar])
+    return config['NETCONFIG'][myVar]
+
 
 def manyRanges():
     ranges = 0
     for i in range(1, 9):
         i = str(i)
-        if config.has_option('NETCONFIG','IPRange' + i):
+        if config.has_option('NETCONFIG', 'IPRange' + i):
             ranges = ranges +1
         else:
             break
     ranges = int(ranges)
     return ranges
 
+
 def readBrute(myVar):
-    return (config['BRUTEFORCE'][myVar])
+    return config['BRUTEFORCE'][myVar]

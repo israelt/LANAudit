@@ -24,6 +24,8 @@ def getLocalIP(interface='eth0'):
     except OSError:
         return -1
 
+
+# Lee la configuration de máscara de red de un interfaz
 def getLocalMask(interface='eth0'):
     try:
         return socket.inet_ntoa(fcntl.ioctl(
@@ -64,9 +66,8 @@ def ipConfig(ip, interface='eth0', mask='255.255.255.0'):
     ip = (getLocalIP(interface))
     return ip
 
-
+# Inserta los datos de configuración IP en la base de datos
 def saveConfig(onlyname, ip, mask, interface, mode, bruteforce, bonlycheck, buserfile):
-    # Se insertan los datos en la base de datos
     scriptdir = (os.path.dirname(os.path.realpath(__file__)))
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     connection = sqlite3.connect(dbname)

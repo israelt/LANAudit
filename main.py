@@ -42,7 +42,7 @@ def initLog(logFile):
 
 # Función para cambio de representación de máscara de red a cidr
 def mask_cidr(mask):
-    return (sum([bin(int(bits)).count("1") for bits in mask.split(".")]))
+    return sum([bin(int(bits)).count("1") for bits in mask.split(".")])
 
 
 # Función para guardar los hosts descubiertos en NMAP en una lista
@@ -306,6 +306,7 @@ def auditScan(ip, mask):
 
 ### FIN DE FUNCIONES ###
 
+
 ### EJECUCION ###
 
 # Configura el nombre de los ficheros de análisis utilizando la fecha y hora para evitar duplicados y dejar evidencia
@@ -346,7 +347,7 @@ print('INIT: Creando tablas necesarias en SQLite')
 logging.info('INIT: Creando tablas necesarias en SQLite')
 createtables.maintables(dbname)
 
-# Comienza la configuracion IP
+# Comienza la configuración IP
 # Proceso AUTO = DHCP o por RANGOS
 if mode == 'auto':
     logging.info("IP: Probando configuracion DHCP")
@@ -374,7 +375,7 @@ if mode == 'auto':
         # Se intenta configuración sin IP fija ni DHCP por rangos de IP en fichero ini
         rangeConf()
 
-# Proceso IP ESTATICA
+# Proceso IP ESTÁTICA
 if mode == 'static':
     ip = '10.10.10.1'
     mask = '255.255.0.0'

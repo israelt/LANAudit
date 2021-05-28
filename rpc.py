@@ -9,8 +9,9 @@ import sqlite3
 
 scriptdir = (os.path.dirname(os.path.realpath(__file__)))
 
+
 def scan(onlyname, ip):
-    # Se definen los parametros, variables iniciales y fichero de log para stdout
+    # Se definen los parámetros, variables iniciales y fichero de log para stdout
     vulnerable = 0
     logfile = open(scriptdir + '/audits/' + onlyname + '.rpc_' + ip + '.log', 'a+')
 
@@ -35,7 +36,7 @@ def scan(onlyname, ip):
             logfile.close()
             break
 
-    # Se insertan los datos en la BBDD
+    # Se insertan los datos en la base de datos
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()

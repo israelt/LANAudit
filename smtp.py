@@ -8,12 +8,14 @@ import sqlite3
 
 scriptdir = (os.path.dirname(os.path.realpath(__file__)))
 
+
 def scan(onlyname, ip, port):
-    # Se definen los parametros y variables iniciales y definen los ficheros de logs necesarios
+    # Se definen los parámetros y variables iniciales y definen los ficheros de logs necesarios
     vulnerable = 0
     logfile = scriptdir + '/audits/' + onlyname + '.smtp_' + ip + '.log'
 
-    # Comienza el escaneo mediante la invocacion de un script sh propio con volcado a los ficheros anteriormente definidos
+    # Comienza el escaneo mediante la invocacion de un script sh propio con volcado a los ficheros anteriormente 
+    # definidos 
     commandraw = '{ echo "HELO"; echo "MAIL"; echo "QUIT"; sleep 1; } | telnet ' + ip + ' ' + port
     command = ('sudo sh ' + scriptdir + '/smtp_script.sh ' + ip + ' ' + port + ' ' + logfile)
     command = command.split()
@@ -36,7 +38,7 @@ def scan(onlyname, ip, port):
             vulnerable = 1
             break
 
-    # Se insertan los datos en la BBDD
+    # Se insertan los datos en la base de datos
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()

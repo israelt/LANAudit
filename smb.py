@@ -8,8 +8,9 @@ from shlex import split
 import subprocess
 import sqlite3
 
+
 def scan(mainname, ip):
-    # Se definen los parametros y variables iniciales
+    # Se definen los parámetros y variables iniciales
     dbname = mainname + '.db'
     mainname = mainname + '.smb_' + ip
     mask = '32'
@@ -27,13 +28,14 @@ def scan(mainname, ip):
     if os.path.exists(mainname + '.nmap'):
         os.rename(mainname + '.nmap', mainname + '.log')
 
-    # Conversion de datos
+    # Conversión de datos
     command = ('python3 nmaptocsv.py -i ' + mainname + '.log -f ip-os-protocol-port-service-script')
     command = split(command)
     process = subprocess.Popen(command,
                                stdout=subprocess.PIPE,
                                universal_newlines=True)
-    # Parseo de datos a BD
+    
+    # Parseo de datos a insertar en la base de datos
     while True:
         output = process.stdout.readline()
         if output.strip() == '"IP";"OS";"PROTOCOL";"PORT";"SERVICE";"SCRIPT"':
@@ -51,7 +53,7 @@ def scan(mainname, ip):
                     else:
                         data[5] = "SI"
                         vulnerable = 1
-                    # Se insertan los datos en la BBDD
+                    # Se insertan los datos en la base de datos
                     connection = sqlite3.connect(dbname)
                     cursor = connection.cursor()
                     sql_insert = """INSERT INTO smb (ip, command, vunl, output) VALUES (?,?,?,?);"""

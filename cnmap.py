@@ -1,4 +1,4 @@
-# Lanzador de NMAP para
+# Lanzador de NMAP para LANAudit
 # Israel Torres Gonzalo
 # TFG UOC 2020/2021 S2
 

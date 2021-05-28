@@ -7,17 +7,18 @@ from shlex import split
 import subprocess
 import sqlite3
 
+
 def scannmap(network, mask, mainname):
     # Comienza el escaneo
     cnmap.portscan(hosts=network + '/' + mask, arguments='-Pn -sV -O ', logname=mainname)
-    #nm.scan(hosts=network + '/' + mask, arguments='-Pn -sV -O -sU -sT ', logname=mainname)
-    #m.scan(hosts=network + '/' + mask, arguments='-sn', logname=mainname)
-    # Conversion de datos
+
+    # Conversión de datos
     command = ('python3 nmaptocsv.py -i ' + mainname + '.gnmap -f ip-os-protocol-port-service-version')
     command = split(command)
     process = subprocess.Popen(command,
                                stdout=subprocess.PIPE,
                                universal_newlines=True)
+    
     # Parseo de datos a BD
     while True:
         output = process.stdout.readline()
@@ -30,7 +31,7 @@ def scannmap(network, mask, mainname):
                 if ';' in output.strip():
                     data = output.strip().split(';')
                     print(data)
-                    # Se insertan los datos en la BBDD
+                    # Se insertan los datos en la base de datos
                     dbname = mainname + '.db'
                     connection = sqlite3.connect(dbname)
                     cursor = connection.cursor()
@@ -49,5 +50,3 @@ def scannmap(network, mask, mainname):
             break
 
     return 0
-
-

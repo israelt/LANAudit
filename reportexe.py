@@ -8,8 +8,9 @@ from datetime import datetime
 
 scriptdir = (os.path.dirname(os.path.realpath(__file__)))
 
+
 def lastlines(file, lines=15):
-    # Devuelve las ultimas lineas de un fichero de texto
+    # Devuelve las últimas líneas de un fichero de texto
     BLOCK_SIZE = 1024
     file.seek(0, 2)
     block_end = file.tell()
@@ -33,19 +34,21 @@ def lastlines(file, lines=15):
     lastlines = lastlines.replace('\\n', '<br>').replace('\\t', '')
     return lastlines
 
+
 def correctdate(mydate):
     # Formatea correctamente una fecha desde el timestamp creado en el proceso
     mynewdate = mydate[6:8] + '/' + mydate[4:6] + '/' + mydate[0:4] + ' a las ' + mydate[9:11] + ':' + mydate[11:13]
     return mynewdate
 
+
 def tr_ipconfig(onlyname):
-    # Encargado de generar la cabecera del reporte y la seccion de Configuración inicial
-    # Variables para uso en la funcion
+    # Encargado de generar la cabecera del reporte y la sección de Configuración inicial
+    # Variables para uso en la función
     htmlfile = scriptdir + '/audits/' + onlyname + '_reporte_ejecutivo.html'
     date = correctdate(onlyname)
     now = datetime.now()
     nowdate = now.strftime("%d/%m/%Y a las %H:%M")
-    # Se genera codigo HTML de reporte con los valores obtenidos desde SQLITE
+    # Se genera código HTML de reporte con los valores obtenidos desde SQLITE
     html_str = """\
     <html !DOCTYPE>
         <head>
@@ -58,16 +61,17 @@ def tr_ipconfig(onlyname):
             <p><b>Reporte realizado el {nowdate}</b></p>
             <br>
     """.format(date=date, nowdate=nowdate)
-    Html_file= open(htmlfile, "w")
-    Html_file.write(html_str)
-    Html_file.close()
+    html_file= open(htmlfile, "w")
+    html_file.write(html_str)
+    html_file.close()
+
 
 def tr_nmap(onlyname):
-    # Encargado de generar la seccion de escaneo de hosts y puertos mediante NMAP
-    # Variables para uso en la funcion
+    # Encargado de generar la sección de escaneo de hosts y puertos mediante NMAP
+    # Variables para uso en la función
     htmlfile = scriptdir + '/audits/' + onlyname + '_reporte_ejecutivo.html'
     dbname = scriptdir + '/audits/' + onlyname + '.db'
-    # Se genera codigo HTML de reporte
+    # Se genera código HTML de reporte
     html_str = """\
             <h2>RESULTADO DEL ESCÁNER DE PUERTOS</h2>
             <p>
@@ -83,19 +87,19 @@ def tr_nmap(onlyname):
                     <th>Version</th>
                 </tr>
     """
-    Html_file= open(htmlfile, "a")
-    Html_file.write(html_str)
+    html_file= open(htmlfile, "a")
+    html_file.write(html_str)
     # Se consulta base de datos SQLITE
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
     cursor.execute("SELECT ip, os, protocol, port, service, version from nmap")
-    Html_file = open(htmlfile, "a")
+    html_file = open(htmlfile, "a")
     while True:
         row = cursor.fetchone()
         if row is None:
             connection.close()
             break
-        # Se genera codigo HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
+        # Se genera código HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
         html_str = """\
                     <tr>
                         <td>{ip}</td>
@@ -105,17 +109,18 @@ def tr_nmap(onlyname):
                         <td>{version}</td>
                     </tr>
         """.format(ip=str(row[0]), os=str(row[1]), protocol=str(row[2]), port=str(row[3]) ,version=str(row[4]))
-        Html_file.write(html_str)
+        html_file.write(html_str)
     html_str = """\
             </table>
             <br>
      """
-    Html_file.write(html_str)
-    Html_file.close()
+    html_file.write(html_str)
+    html_file.close()
+
 
 def tr_dhcp(onlyname):
-    # Encargado de generar la seccion de vulnerabilidades DHCP
-    # Variables para uso en la funcion
+    # Encargado de generar la sección de vulnerabilidades DHCP
+    # Variables para uso en la función
     htmlfile = scriptdir + '/audits/' + onlyname + '_reporte_ejecutivo.html'
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     # Se consulta base de datos SQLITE
@@ -133,9 +138,9 @@ def tr_dhcp(onlyname):
                 </p>
                 <br>
         """
-        Html_file= open(htmlfile, "a")
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file= open(htmlfile, "a")
+        html_file.write(html_str)
+        html_file.close()
     # Si NO existe vulnerabilidad
     else:
         # Se consulta base de datos SQLITE
@@ -146,12 +151,13 @@ def tr_dhcp(onlyname):
                    </p>
                    <br>
            """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
+
 
 def tr_netbios(onlyname):
-    # Encargado de generar la seccion de vulnerabilidades NETBIOS
-    # Variables para uso en la funcion
+    # Encargado de generar la sección de vulnerabilidades NETBIOS
+    # Variables para uso en la función
     htmlfile = scriptdir + '/audits/' + onlyname + '_reporte_ejecutivo.html'
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     # Se consulta base de datos SQLITE
@@ -177,19 +183,19 @@ def tr_netbios(onlyname):
                         <th>Fichero de registro disponible</th>
                     </tr>
         """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
         # Se consulta base de datos SQLITE para tabla de hosts vulnerables
         connection = sqlite3.connect(dbname)
         cursor = connection.cursor()
         cursor.execute("SELECT ip, command, output from netbios WHERE vunl = 'SI'")
-        Html_file = open(htmlfile, "a")
+        html_file = open(htmlfile, "a")
         while True:
             row = cursor.fetchone()
             if row is None:
                 connection.close()
                 break
-            # Se genera codigo HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
+            # Se genera código HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
             html_str = """\
                         <tr>
                             <td>{ip}</td>
@@ -197,16 +203,16 @@ def tr_netbios(onlyname):
                             <td>{output}</td>
                         </tr>
             """.format(ip=str(row[0]), commmand=str(row[1]), output=str(row[2]))
-            Html_file.write(html_str)
+            html_file.write(html_str)
         html_str = """\
                 </table>
                 <br>
          """
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file.write(html_str)
+        html_file.close()
     # Si NO existe vulnerabilidad
     else:
-        # Se genera codigo HTML de reporte de NO vulnerabilidad
+        # Se genera código HTML de reporte de NO vulnerabilidad
         html_str = """\
                    <h2>RESULTADO DE VULNERABILIDADES NETBIOS</h2>
                    <p>
@@ -214,13 +220,14 @@ def tr_netbios(onlyname):
                    </p>
                    <br>
            """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
+        html_file.close()
+
 
 def tr_smb(onlyname):
-    # Encargado de generar la seccion de vulnerabilidades SMB
-    # Variables para uso en la funcion
+    # Encargado de generar la sección de vulnerabilidades SMB
+    # Variables para uso en la función
     htmlfile = scriptdir + '/audits/' + onlyname + '_reporte_ejecutivo.html'
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     # Se consulta base de datos SQLITE
@@ -246,19 +253,19 @@ def tr_smb(onlyname):
                         <th>Fichero de registro disponible</th>
                     </tr>
         """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
         # Se consulta base de datos SQLITE para tabla de hosts vulnerables
         connection = sqlite3.connect(dbname)
         cursor = connection.cursor()
         cursor.execute("SELECT ip, command, output from smb WHERE vunl = 'SI'")
-        Html_file = open(htmlfile, "a")
+        html_file = open(htmlfile, "a")
         while True:
             row = cursor.fetchone()
             if row is None:
                 connection.close()
                 break
-            # Se genera codigo HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
+            # Se genera código HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
             html_str = """\
                         <tr>
                             <td>{ip}</td>
@@ -266,16 +273,16 @@ def tr_smb(onlyname):
                             <td>{output}</td>
                         </tr>
             """.format(ip=str(row[0]), commmand=str(row[1]), output=str(row[2]))
-            Html_file.write(html_str)
+            html_file.write(html_str)
         html_str = """\
                 </table>
                 <br>
          """
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file.write(html_str)
+        html_file.close()
     # Si NO existe vulnerabilidad
     else:
-        # Se genera codigo HTML de reporte de NO vulnerabilidad
+        # Se genera código HTML de reporte de NO vulnerabilidad
         html_str = """\
                    <h2>RESULTADO DE VULNERABILIDADES SMB</h2>
                    <p>
@@ -283,13 +290,14 @@ def tr_smb(onlyname):
                    </p>
                    <br>
            """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
+        html_file.close()
+
 
 def tr_smbghost(onlyname):
-    # Encargado de generar la seccion de vulnerabilidades SMB GHOST
-    # Variables para uso en la funcion
+    # Encargado de generar la sección de vulnerabilidades SMB GHOST
+    # Variables para uso en la función
     htmlfile = scriptdir + '/audits/' + onlyname + '_reporte_ejecutivo.html'
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     # Se consulta base de datos SQLITE
@@ -314,35 +322,35 @@ def tr_smbghost(onlyname):
                         <th>Comando ejecutado</th>
                     </tr>
         """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
         # Se consulta base de datos SQLITE para tabla de hosts vulnerables
         connection = sqlite3.connect(dbname)
         cursor = connection.cursor()
         cursor.execute("SELECT ip, command, output from smbghost WHERE vunl = 'SI'")
-        Html_file = open(htmlfile, "a")
+        html_file = open(htmlfile, "a")
         while True:
             row = cursor.fetchone()
             if row is None:
                 connection.close()
                 break
-            # Se genera codigo HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
+            # Se genera código HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
             html_str = """\
                         <tr>
                             <td>{ip}</td>
                             <td>{commmand}</td>
                         </tr>
             """.format(ip=str(row[0]), commmand=str(row[1]))
-            Html_file.write(html_str)
+            html_file.write(html_str)
         html_str = """\
                 </table>
                 <br>
          """
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file.write(html_str)
+        html_file.close()
     # Si NO existe vulnerabilidad
     else:
-        # Se genera codigo HTML de reporte de NO vulnerabilidad
+        # Se genera código HTML de reporte de NO vulnerabilidad
         html_str = """\
                    <h2>RESULTADO DE VULNERABILIDADES SMB GHOST</h2>
                    <p>
@@ -350,13 +358,14 @@ def tr_smbghost(onlyname):
                    </p>
                    <br>
            """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
+        html_file.close()
+
 
 def tr_rpc(onlyname):
-    # Encargado de generar la seccion de vulnerabilidades RPC
-    # Variables para uso en la funcion
+    # Encargado de generar la sección de vulnerabilidades RPC
+    # Variables para uso en la función
     htmlfile = scriptdir + '/audits/' + onlyname + '_reporte_ejecutivo.html'
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     # Se consulta base de datos SQLITE
@@ -382,13 +391,13 @@ def tr_rpc(onlyname):
                         <th>Fichero de registro disponible</th>
                     </tr>
         """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
         # Se consulta base de datos SQLITE para tabla de hosts vulnerables
         connection = sqlite3.connect(dbname)
         cursor = connection.cursor()
         cursor.execute("SELECT ip, command, output from rpc WHERE vunl = 'SI'")
-        Html_file = open(htmlfile, "a")
+        html_file = open(htmlfile, "a")
         while True:
             row = cursor.fetchone()
             if row is None:
@@ -402,17 +411,17 @@ def tr_rpc(onlyname):
                             <td>{output}</td>
                         </tr>
             """.format(ip=str(row[0]), commmand=str(row[1]), output=str(row[2]))
-            Html_file.write(html_str)
+            html_file.write(html_str)
         html_str = """\
                 </table>
                 <br>
          """
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file.write(html_str)
+        html_file.close()
     # Si NO existe vulnerabilidad
     else:
         logfile = scriptdir + '/audits/' + onlyname + '.rpc_Dirección_IP_DEL_HOST.log'
-        # Se genera codigo HTML de reporte de NO vulnerabilidad
+        # Se genera código HTML de reporte de NO vulnerabilidad
         html_str = """\
                    <h2>RESULTADO DE VULNERABILIDADES RPC</h2>
                    <p>
@@ -420,13 +429,14 @@ def tr_rpc(onlyname):
                    </p>
                    <br>
            """.format(logfile=logfile)
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
+        html_file.close()
+
 
 def tr_snmp(onlyname):
-    # Encargado de generar la seccion de vulnerabilidades SNMP
-    # Variables para uso en la funcion
+    # Encargado de generar la sección de vulnerabilidades SNMP
+    # Variables para uso en la función
     htmlfile = scriptdir + '/audits/' + onlyname + '_reporte_ejecutivo.html'
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     # Se consulta base de datos SQLITE
@@ -452,19 +462,19 @@ def tr_snmp(onlyname):
                         <th>Fichero de registro disponible</th>
                     </tr>
         """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
         # Se consulta base de datos SQLITE para tabla de hosts vulnerables
         connection = sqlite3.connect(dbname)
         cursor = connection.cursor()
         cursor.execute("SELECT ip, command, output from snmp WHERE vunl = 'SI'")
-        Html_file = open(htmlfile, "a")
+        html_file = open(htmlfile, "a")
         while True:
             row = cursor.fetchone()
             if row is None:
                 connection.close()
                 break
-            # Se genera codigo HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
+            # Se genera código HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
             html_str = """\
                         <tr>
                             <td>{ip}</td>
@@ -472,16 +482,16 @@ def tr_snmp(onlyname):
                             <td>{output}</td>
                         </tr>
             """.format(ip=str(row[0]), commmand=str(row[1]), output=str(row[2]))
-            Html_file.write(html_str)
+            html_file.write(html_str)
         html_str = """\
                 </table>
                 <br>
          """
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file.write(html_str)
+        html_file.close()
     # Si NO existe vulnerabilidad
     else:
-        # Se genera codigo HTML de reporte de NO vulnerabilidad
+        # Se genera código HTML de reporte de NO vulnerabilidad
         html_str = """\
                    <h2>RESULTADO DE VULNERABILIDADES SNMP</h2>
                    <p>
@@ -489,13 +499,14 @@ def tr_snmp(onlyname):
                    </p>
                    <br>
            """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
+        html_file.close()
+
 
 def tr_smtp(onlyname):
-    # Encargado de generar la seccion de vulnerabilidades SMTP
-    # Variables para uso en la funcion
+    # Encargado de generar la sección de vulnerabilidades SMTP
+    # Variables para uso en la función
     htmlfile = scriptdir + '/audits/' + onlyname + '_reporte_ejecutivo.html'
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     # Se consulta base de datos SQLITE
@@ -521,19 +532,19 @@ def tr_smtp(onlyname):
                         <th>Fichero de registro disponible</th>
                     </tr>
         """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
         # Se consulta base de datos SQLITE para tabla de hosts vulnerables
         connection = sqlite3.connect(dbname)
         cursor = connection.cursor()
         cursor.execute("SELECT ip, command, output from smtp WHERE vunl = 'SI'")
-        Html_file = open(htmlfile, "a")
+        html_file = open(htmlfile, "a")
         while True:
             row = cursor.fetchone()
             if row is None:
                 connection.close()
                 break
-            # Se genera codigo HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
+            # Se genera código HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
             html_str = """\
                         <tr>
                             <td>{ip}</td>
@@ -541,16 +552,16 @@ def tr_smtp(onlyname):
                             <td>{output}</td>
                         </tr>
             """.format(ip=str(row[0]), commmand=str(row[1]), output=str(row[2]))
-            Html_file.write(html_str)
+            html_file.write(html_str)
         html_str = """\
                 </table>
                 <br>
          """
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file.write(html_str)
+        html_file.close()
     # Si NO existe vulnerabilidad
     else:
-        # Se genera codigo HTML de reporte de NO vulnerabilidad
+        # Se genera código HTML de reporte de NO vulnerabilidad
         html_str = """\
                    <h2>RESULTADO DE VULNERABILIDADES SMTP</h2>
                    <p>
@@ -558,13 +569,14 @@ def tr_smtp(onlyname):
                    </p>
                    <br>
            """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
+        html_file.close()
+
 
 def tr_guest(onlyname):
-    # Encargado de generar la seccion de vulnerabilidades de cuentas de invitado
-    # Variables para uso en la funcion
+    # Encargado de generar la sección de vulnerabilidades de cuentas de invitado
+    # Variables para uso en la función
     htmlfile = scriptdir + '/audits/' + onlyname + '_reporte_ejecutivo.html'
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     # Se consulta base de datos SQLITE
@@ -590,19 +602,19 @@ def tr_guest(onlyname):
                         <th>Fichero de registro disponible</th>
                     </tr>
         """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
         # Se consulta base de datos SQLITE para tabla de hosts vulnerables
         connection = sqlite3.connect(dbname)
         cursor = connection.cursor()
         cursor.execute("SELECT ip, command, output from guest WHERE vunl = 'SI'")
-        Html_file = open(htmlfile, "a")
+        html_file = open(htmlfile, "a")
         while True:
             row = cursor.fetchone()
             if row is None:
                 connection.close()
                 break
-            # Se genera codigo HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
+            # Se genera código HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
             html_str = """\
                         <tr>
                             <td>{ip}</td>
@@ -610,16 +622,16 @@ def tr_guest(onlyname):
                             <td>{output}</td>
                         </tr>
             """.format(ip=str(row[0]), commmand=str(row[1]), output=str(row[2]))
-            Html_file.write(html_str)
+            html_file.write(html_str)
         html_str = """\
                 </table>
                 <br>
          """
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file.write(html_str)
+        html_file.close()
     # Si NO existe vulnerabilidad
     else:
-        # Se genera codigo HTML de reporte de NO vulnerabilidad
+        # Se genera código HTML de reporte de NO vulnerabilidad
         html_str = """\
                    <h2>RESULTADO DE VULNERABILIDADES POR CUENTAS DE INVITADO</h2>
                    <p>
@@ -627,13 +639,14 @@ def tr_guest(onlyname):
                    </p>
                    <br>
            """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
+        html_file.close()
+
 
 def tr_web(onlyname):
-    # Encargado de generar la seccion de vulnerabilidades WEB
-    # Variables para uso en la funcion
+    # Encargado de generar la sección de vulnerabilidades WEB
+    # Variables para uso en la función
     htmlfile = scriptdir + '/audits/' + onlyname + '_reporte_ejecutivo.html'
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     # Se consulta base de datos SQLITE
@@ -661,19 +674,19 @@ def tr_web(onlyname):
                         <th>Fichero de registro disponible</th>
                     </tr>
         """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
         # Se consulta base de datos SQLITE para tabla de hosts vulnerables
         connection = sqlite3.connect(dbname)
         cursor = connection.cursor()
         cursor.execute("SELECT ip, command, vunl, output from web")
-        Html_file = open(htmlfile, "a")
+        html_file = open(htmlfile, "a")
         while True:
             row = cursor.fetchone()
             if row is None:
                 connection.close()
                 break
-            # Se genera codigo HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
+            # Se genera código HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
             html_str = """\
                         <tr>
                             <td>{ip}</td>
@@ -682,16 +695,16 @@ def tr_web(onlyname):
                             <td>{output}</td>
                         </tr>
             """.format(ip=str(row[0]), commmand=str(row[1]), vunl=str(row[2]), output=str(row[3]))
-            Html_file.write(html_str)
+            html_file.write(html_str)
         html_str = """\
                 </table>
                 <br>
          """
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file.write(html_str)
+        html_file.close()
     # Si NO existe vulnerabilidad
     else:
-        # Se genera codigo HTML de reporte de NO vulnerabilidad
+        # Se genera código HTML de reporte de NO vulnerabilidad
         html_str = """\
                    <h2>RESULTADO DE VULNERABILIDADES WEB</h2>
                    <p>
@@ -699,13 +712,14 @@ def tr_web(onlyname):
                    </p>
                    <br>
            """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
+        html_file.close()
+
 
 def tr_brute(onlyname):
-    # Encargado de generar la seccion de vulnerabilidades Brute Force Attack
-    # Variables para uso en la funcion
+    # Encargado de generar la sección de vulnerabilidades Brute Force Attack
+    # Variables para uso en la función
     htmlfile = scriptdir + '/audits/' + onlyname + '_reporte_ejecutivo.html'
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     # Se consulta base de datos SQLITE
@@ -732,19 +746,19 @@ def tr_brute(onlyname):
                         <th>Fichero de registro disponible</th>
                     </tr>
         """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
         # Se consulta base de datos SQLITE para tabla de hosts vulnerables
         connection = sqlite3.connect(dbname)
         cursor = connection.cursor()
         cursor.execute("SELECT ip, command, vunl, output from brute")
-        Html_file = open(htmlfile, "a")
+        html_file = open(htmlfile, "a")
         while True:
             row = cursor.fetchone()
             if row is None:
                 connection.close()
                 break
-            # Se genera codigo HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
+            # Se genera código HTML de reporte con los valores obtenidos desde SQLITE a modo de tabla
             html_str = """\
                         <tr>
                             <td>{ip}</td>
@@ -753,16 +767,16 @@ def tr_brute(onlyname):
                             <td>{output}</td>
                         </tr>
             """.format(ip=str(row[0]), commmand=str(row[1]), vunl=str(row[2]), output=str(row[3]))
-            Html_file.write(html_str)
+            html_file.write(html_str)
         html_str = """\
                 </table>
                 <br>
          """
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file.write(html_str)
+        html_file.close()
     # Si NO existe vulnerabilidad
     else:
-        # Se genera codigo HTML de reporte de NO vulnerabilidad
+        # Se genera código HTML de reporte de NO vulnerabilidad
         html_str = """\
                    <h2>RESULTADO DE VULNERABILIDADES A ATAQUES DE FUERZA BRUTA</h2>
                    <p>
@@ -770,14 +784,15 @@ def tr_brute(onlyname):
                    </p>
                    <br>
            """
-        Html_file = open(htmlfile, "a")
-        Html_file.write(html_str)
-        Html_file.close()
+        html_file = open(htmlfile, "a")
+        html_file.write(html_str)
+        html_file.close()
+
 
 def tr_logger(onlyname):
     # Encargado de cerrar el código HTML del reporte
     htmlfile = scriptdir + '/audits/' + onlyname + '_reporte_ejecutivo.html'
-    Html_file = open(htmlfile, "a")
+    html_file = open(htmlfile, "a")
     html_str = """\
             <br>
             <h1>LANAudit - FIN DE REPORTE EJECUTIVO</h1>
@@ -792,7 +807,8 @@ def tr_logger(onlyname):
         </body>
     </html>
         """
-    Html_file.write(html_str)
+    html_file.write(html_str)
+
 
 def tr_print(onlyname):
     # Encargado de generar el informe en PDF
@@ -800,6 +816,7 @@ def tr_print(onlyname):
     pdffile = scriptdir + '/audits/' + onlyname + '_reporte_ejecutivo.pdf'
     cmd = 'weasyprint ' + htmlfile + ' ' + pdffile + ' -p'
     os.system(cmd)
+
 
 def do(onlyname, brute = '1'):
     tr_ipconfig(onlyname)

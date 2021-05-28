@@ -6,7 +6,7 @@ import sqlite3
 
 
 def maintables(dbname):
-    # Se crean las tablas de datos necesarias para los distintos escaneres
+    # Se crean las tablas de datos necesarias para los distintos escáneres y procesos
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
     cursor.execute("CREATE TABLE IF NOT EXISTS ipsearch(" +

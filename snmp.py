@@ -9,8 +9,9 @@ import sqlite3
 
 scriptdir = (os.path.dirname(os.path.realpath(__file__)))
 
+
 def scan(mainname, ip):
-    # Se definen los parametros y variables iniciales
+    # Se definen los parámetros y variables iniciales
     vulnerable = 0
     dbname = mainname + '.db'
     mainname = mainname + '.snmp_' + ip
@@ -18,8 +19,10 @@ def scan(mainname, ip):
 
     # Comienza el escaneo
     vulnerable = 0
-    cnmap.portscan(hosts=ip + '/' + mask, ports='161', arguments='-sU --script snmp-brute --script-args snmp-brute.communitiesdb=' + scriptdir + '/snmp_common_names.list', logname=mainname)
-    commandraw = 'nmap -p161 -sU --script snmp-brute --script-args snmp-brute.communitiesdb=' + scriptdir + '/snmp_common_names.list '+ ip
+    cnmap.portscan(hosts=ip + '/' + mask, ports='161',
+                   arguments='-sU --script snmp-brute --script-args snmp-brute.communitiesdb=' + scriptdir + '/snmp_common_names.list',
+                   logname=mainname)
+    commandraw = 'nmap -p161 -sU --script snmp-brute --script-args snmp-brute.communitiesdb=' + scriptdir + '/snmp_common_names.list ' + ip
 
     # Borrado de otros logs y cambio de nombre
     if os.path.exists(mainname + '.gnmap'):
@@ -29,7 +32,7 @@ def scan(mainname, ip):
     if os.path.exists(mainname + '.nmap'):
         os.rename(mainname + '.nmap', mainname + '.log')
 
-    # Parseo de datos a BD
+    # Se "parsean" de los datos
     openlogfile = open(mainname + '.log', 'r')
     while True:
         output = openlogfile.readline()
@@ -42,7 +45,7 @@ def scan(mainname, ip):
             vulnerable = 1
             break
 
-    # Si es vulnerable se extrae mas informacion
+    # Si es vulnerable se extrae más información
     if vulnerable == 1:
         openlogfile = open(mainname + '.log', 'a+')
         commandraw2 = ('snmp-check ' + ip + ' -p 161 -c ' + community)
@@ -50,7 +53,7 @@ def scan(mainname, ip):
         subprocess.call(command, stdout=openlogfile)
         openlogfile.close()
 
-    # Se insertan los datos en la BBDD
+    # Se insertan los datos en la base de datos
     if vulnerable == 1:
         vuln = 'SI'
     else:
@@ -63,5 +66,5 @@ def scan(mainname, ip):
     connection.commit()
     connection.close()
 
-    # Devolvemos 1 o 0 dependiendo de si es vulnerable o no
+    # Se devuelve 1 o 0 dependiendo de si es vulnerable o no
     return vulnerable

@@ -44,7 +44,7 @@ def scan(onlyname, ip):
                 os.remove(scriptdir + '/audits/' + onlyname + '.guest.error')
                 break
 
-    # Se insertan los datos en la BBDD
+    # Se insertan los datos en la base de datos
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()

@@ -9,8 +9,9 @@ import sqlite3
 
 scriptdir = (os.path.dirname(os.path.realpath(__file__)))
 
+
 def scan(onlyname, ip):
-    # Se definen los parametros y variables iniciales y se abren los ficheros de log y errores necesarios
+    # Se definen los parámetros y variables iniciales y se abren los ficheros de log y errores necesarios
     vulnerable = 0
     if os.path.isfile(scriptdir + '/audits/' + onlyname + '.netbios.error'):
         os.remove(scriptdir + '/audits/' + onlyname + '.netbios.error')
@@ -32,7 +33,7 @@ def scan(onlyname, ip):
         copyfile(scriptdir + '/audits/' + onlyname + '.netbios.error', scriptdir + '/audits/' + onlyname + '.netbios_' + ip + '.log')
         vulnerable = 0
 
-    # Se insertan los datos en la BBDD
+    # Se insertan los datos en la base de datos
     dbname = scriptdir + '/audits/' + onlyname + '.db'
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
@@ -45,5 +46,5 @@ def scan(onlyname, ip):
     connection.commit()
     connection.close()
 
-    # Devolvemos 1 o 0 dependiendo de si es vulnerable o no
+    # Se devuelve 1 o 0 dependiendo de si es vulnerable o no
     return vulnerable
