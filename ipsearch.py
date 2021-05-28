@@ -19,7 +19,7 @@ def ipSearch(interface='eth0', dbname='pruebas.db'):
     return myIP
 
 
-# Realiza un ping a la dirección de broadcast del interfaz definido para forzar paquetes a escanear
+# Realiza un ping a la dirección de broadcast de la interfaz definida para forzar paquetes a escanear
 def makeBroadcast(interface='eth0'):
     command = ('ping -I ' + str(interface) + ' -b 255.255.255.255')
     command = split(command)
@@ -28,7 +28,7 @@ def makeBroadcast(interface='eth0'):
                                universal_newlines=True)
 
 
-# Realiza un escaner de la interfaz de red buscando  IP activas para conseguir el direccionamiento de la red
+# Realiza un escaner de la interfaz de red buscando IP activas para conseguir el direccionamiento de la red
 def ettercap(interface='eth0', dbname='pruebas.db'):
     # Se inicia la búsqueda de hots
     command = ('timeout 60 ettercap -i ' + str(interface) + ' -Tq -s lq')

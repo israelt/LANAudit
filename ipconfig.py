@@ -11,7 +11,7 @@ import sqlite3
 import os
 
 
-# Lee la configuration IP de un interfaz para asegurar que tiene una IP asignada
+# Lee la configuration IP de una interfaz para asegurar que tiene una IP asignada
 def getLocalIP(interface='eth0'):
     try:
         opensocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -25,7 +25,7 @@ def getLocalIP(interface='eth0'):
         return -1
 
 
-# Lee la configuration de máscara de red de un interfaz
+# Lee la configuration de máscara de red de una interfaz
 def getLocalMask(interface='eth0'):
     try:
         return socket.inet_ntoa(fcntl.ioctl(
