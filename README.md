@@ -73,6 +73,7 @@ OnlyCheck = 1
 UserFile = ./usernames.list
 PowerOff = 0
 ```
+---
 A continuación se detallan los parámetros que se pueden definir en este fichero de configuración:
 
 <h3>[NETCONFIG]</h3>
@@ -81,17 +82,16 @@ A continuación se detallan los parámetros que se pueden definir en este ficher
 Admite las opciones ***auto*** y ***static***
 -	***static***: el sistema configura la interfaz de red seleccionada con la IP y la máscara de red que aparecen en este fichero de configuración. 
 -	***auto***: el sistema configura la interfaz de red seleccionada con DHCP. Si no se consiguiera una IP o esta no tuviera conectividad con su puerta de acceso, se intenta la configuración con cada una de las configuraciones IP de los parámetros IPRange de este fichero, de forma secuencial.
-
+---
 <h4>Interface = eth0</h4>
 Define la interfaz de red que se utilizará para realizar la auditoría.
-
+---
 <h4>IP = 172.26.0.1</h4>
 Define la dirección IP que se configurará en la interfaz para `Mode = static`
-
+---
 <h4>Mask = 255.255.255.0</h4>
 Define la máscara de red que se configurará en la interfaz para `Mode = static`
-
-
+---
 <h4>
  
 
@@ -107,20 +107,20 @@ IPRange5 = 172.26.30.1/255.255.255.0
 </h4>
 
 Es la configuración IP a utilizar cuando `Mode = auto` y no sea posible obtener una dirección IP con conectividad por DHCP. Se configurará en orden secuencial hasta que el sistema tenga conectividad o se finalice la lista, lo que generará un error de aplicación.
-
+---
 <h3>[BRUTEFORCE]</h3>
 <h4>Enabled = 1</h4>
 Indica que la auditoría debe intentar el ataque por fuerza bruta a los puertos TCP: 21(FTP), 22(SSH), 23(TELNET), 389(LDAP), 445(SMB), 3306(MYSQL) y 5900(VNC) 
-
+---
 <h4>OnlyCheck = 1</h4>
 Si se activa el ataque por fuerza bruta sólo se realizará con 100 contraseñas por usuario. Útil si se desea comprobar que el sistema es vulnerable a este tipo de ataques, pero no es necesario conseguir la contraseña, lo que elevaría el tiempo de ejecución
-
+---
 <h4>PowerOff = 0</h4>
 Si se configura a 1 apaga el sistema cuando finaliza la auditoría, en caso contrario al finalizar la auditoría no se realizaría ninguna acción 
-
+---
 <h4>UserFile = ./usernames.list</h4>
 Define el diccionario de nombres de usuario a utilizar en los ataques de fuerza bruta. El diccionario de contraseñas es siempre ***rockyou*** `/usr/share/wordlists/rockyou.txt`o su versión generada de 100 registros si **OnlyCheck = 1**
-
+---
 
 ## AUTO-ARRANQUE
 La instalación de la función de auto-arranque `enable_autostart.sh` elimina cualquier otro servicio arrancado mediante el servicio `rc.local` y configura **LANAudit** para su arranque en cada inicio del sistema operativo. Por ello, se recomienda la instalación y el uso de **LANAudit** en un sistema operativo recién instalado y dedicado a esta tarea.
