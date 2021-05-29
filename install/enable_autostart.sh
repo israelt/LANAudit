@@ -23,5 +23,3 @@ printf '%s\n' '#!/bin/bash' 'sh /opt/lanaudit/lanaudit.sh' 'exit 0' | sudo tee -
 sudo chmod +x /etc/rc.local
 
 sudo systemctl enable rc-local
-
-sudo systemctl start rc-local.service &
