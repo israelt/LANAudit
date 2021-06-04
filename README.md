@@ -163,7 +163,7 @@ Para desinstalar la función de auto-arranque se debe ejecutar con permisos de *
 
 ## LICENCIA Y RECURSOS UTILIZADOS
 
-**LANAudit** está desarrollado bajo licencia **CreativeCommons Reconocimiento-NoComercial-SinObraDerivada 3.0 España** (CC BY-NC-ND 3.0 ES) (https://creativecommons.org/licenses/by-nc-nd/3.0/es/)
+**LANAudit** está desarrollado bajo licencia **Creative Commons Reconocimiento-NoComercial-CompartirIgual 3.0 España (CC BY-NC-SA 3.0 ES)** https://creativecommons.org/licenses/by-nc-sa/3.0/es/
 
 **LANAudit** utiliza diferentes herramientas y utilidades libres disponibles para **KALI Linux** y **DEBIAN Linux** como:
 
