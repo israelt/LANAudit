@@ -18,9 +18,9 @@ No se debe instalar **LANAudit** en sistemas operativos Linux dedicados a tareas
 ---
 
 ## REQUERIMIENTOS
-- KALI Linux 2021.1 o 2021.2 Release (https://www.kali.org/downloads/)
+- KALI Linux 2021.1 (64bits) o 2021.2 (64bits) Release (https://www.kali.org/downloads/)
 
-Versiones de 32 y 64 bits para funcionalidades completas y versiones ARM para funcionalidades limitadas: sin escáner de vulnerabilidades WEB.
+Versiones x86 para funcionalidades completas y versiones ARM para funcionalidades limitadas: sin escáner de vulnerabilidades WEB.
 
 ---
 
@@ -31,9 +31,9 @@ Versiones de 32 y 64 bits para funcionalidades completas y versiones ARM para fu
    
  - `/opt/lanaudit` para la aplicación principal
 
-El proceso de instalación para versiones de 32 y 64 bits es:
+El proceso de instalación para versiones x86 es:
 
-- Se descarga y ejecuta **KALI Linux 2021.1** o **KALI Linux 2021.2**
+- Se descarga y ejecuta **KALI Linux 2021.1** o **KALI Linux 2021.2** (preferiblemente versiones de 64bis)
 - Se hace login y desde una ventana de **shell** se cambia a usuario **root** mediante `sudo su`
 - En shell de **root** se apunta al directorio **/opt** mediante `cd /opt`
 - Se clona el repositorio del proyecto mediante `git clone https://github.com/israelt/lanaudit.git`
