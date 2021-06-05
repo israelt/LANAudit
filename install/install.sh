@@ -52,6 +52,6 @@ head -n100 rockyou.txt >> minrockyou.txt
 pip3 install weasyprint --no-input
 # CONFIGURANDO PERMISOS PARA SCRIPTS DE ARRANQUE Y AUTO-ARRANQUE
 sudo chmod +x /opt/lanaudit/lanaudit.sh
-sudo chmod +x /opt/lanaudit/lanaudit-boot.sh
+sudo chmod +x /opt/lanaudit/install/lanaudit-boot.sh
 sudo chmod +x /opt/lanaudit/install/enable_autostart.sh
 sudo chmod +x /opt/lanaudit/install/disable_autostart.sh
