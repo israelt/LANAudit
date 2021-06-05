@@ -830,7 +830,8 @@ def do(onlyname, brute = '1'):
     tr_snmp(onlyname)
     tr_smtp(onlyname)
     tr_guest(onlyname)
-    tr_web(onlyname)
+    if '64' in (os.uname()[2]).str():
+        tr_web(onlyname)
     if brute == 1:
         tr_brute(onlyname)
     tr_logger(onlyname)

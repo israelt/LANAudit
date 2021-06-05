@@ -49,7 +49,7 @@ def tr_ipconfig(onlyname):
     date = correctdate(onlyname)
     now = datetime.now()
     nowdate = now.strftime("%d/%m/%Y a las %H:%M")
-    osname = (os.uname()[2])
+    osname = (os.uname()[0]).str() + ' ' + (os.uname()[1]).str() + ' ' + (os.uname()[2]).str()
     # Se consulta base de datos SQLITE
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
@@ -1115,7 +1115,8 @@ def do(onlyname, brute='1'):
     tr_snmp(onlyname)
     tr_smtp(onlyname)
     tr_guest(onlyname)
-    tr_web(onlyname)
+    if '64' in (os.uname()[2]).str():
+        tr_web(onlyname)
     if brute == 1:
         tr_brute(onlyname)
     tr_logger(onlyname)

@@ -234,30 +234,34 @@ def auditScan(ip, mask):
             print('SCAN GUEST: El host ' + i + ' NO tiene cuenta de invitado activa en Windows')
             logging.info('SCAN GUEST: El host ' + i + ' NO tiene cuenta de invitado activa en Windows')
     # Escaneando de servicios web
-    hosts.clear()
-    hosts = gethosts(dbname, interface, '80', 'tcp')
-    if len(hosts) == 0:
-        print('SCAN WEB: No se encuentran servidores WEB HTTP')
-        logging.info('SCAN WEB: No se encuentran servidores WEB HTTP')
+    if '64' in (os.uname()[2]).str():
+        hosts.clear()
+        hosts = gethosts(dbname, interface, '80', 'tcp')
+        if len(hosts) == 0:
+            print('SCAN WEB: No se encuentran servidores WEB HTTP')
+            logging.info('SCAN WEB: No se encuentran servidores WEB HTTP')
+        else:
+            for i in hosts:
+                print('SCAN WEB: Escaneando vulnerabilidades WEB de HTTP://' + ip)
+                logging.info('SCAN WEB: Escaneando vulnerabilidades WEB de HTTP://' + ip)
+                if web.scan(onlyname, i, '80') == 0:
+                    print('SCAN WEB: Escaner web del host HTTP://' + i + ' finalizado correctamente')
+                    logging.info('SCAN WEB: Escaner web del host HTTP://' + i + ' finalizado correctamente')
+        hosts.clear()
+        hosts = gethosts(dbname, interface, '443', 'tcp')
+        if len(hosts) == 0:
+            print('SCAN WEB: No se encuentran servidores WEB HTTPS')
+            logging.info('SCAN WEB: No se encuentran servidores WEB HTTPS')
+        else:
+            for i in hosts:
+                print('SCAN WEB: Escaneando vulnerabilidades WEB de HTTPS://' + ip)
+                logging.info('SCAN WEB: Escaneando vulnerabilidades WEB de HTTPS://' + ip)
+                if web.scan(onlyname, i, '443') == 0:
+                    print('SCAN WEB: Escaner web del host HTTPS://' + i + ' finalizado correctamente')
+                    logging.info('SCAN WEB: Escaner web del host HTTPS://' + i + ' finalizado correctamente')
     else:
-        for i in hosts:
-            print('SCAN WEB: Escaneando vulnerabilidades WEB de HTTP://' + ip)
-            logging.info('SCAN WEB: Escaneando vulnerabilidades WEB de HTTP://' + ip)
-            if web.scan(onlyname, i, '80') == 0:
-                print('SCAN WEB: Escaner web del host HTTP://' + i + ' finalizado correctamente')
-                logging.info('SCAN WEB: Escaner web del host HTTP://' + i + ' finalizado correctamente')
-    hosts.clear()
-    hosts = gethosts(dbname, interface, '443', 'tcp')
-    if len(hosts) == 0:
-        print('SCAN WEB: No se encuentran servidores WEB HTTPS')
-        logging.info('SCAN WEB: No se encuentran servidores WEB HTTPS')
-    else:
-        for i in hosts:
-            print('SCAN WEB: Escaneando vulnerabilidades WEB de HTTPS://' + ip)
-            logging.info('SCAN WEB: Escaneando vulnerabilidades WEB de HTTPS://' + ip)
-            if web.scan(onlyname, i, '443') == 0:
-                print('SCAN WEB: Escaner web del host HTTPS://' + i + ' finalizado correctamente')
-                logging.info('SCAN WEB: Escaner web del host HTTPS://' + i + ' finalizado correctamente')
+        print('SCAN WEB: El sistema hardware utilizado no soporta el escaner web')
+        logging.info('SCAN WEB: El sistema hardware utilizado no soporta el escaner web')
     # Escaneo por fuerza bruta
     if brute == 1:
         services = ['21', '22', '23', '389', '445', '3306', '5900']
