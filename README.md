@@ -9,7 +9,7 @@
 ## ADVERTENCIA
 Esta utilidad pertenece al **proyecto de fin de grado de la UOC 2020/2021 S2**. El creador de esta utilidad se exime de cualquier daño o perjuicio derivado de su uso incorrecto o su uso en redes en producción. Está orientada a la auditoría de redes y su uso se deberá limitar a redes de test o laboratorios virtuales.
 
-La instalación de la función de auto-arranque `enable_autostart.sh` elimina cualquier otro servicio arrancado mediante el servicio `rc.local` y configura **LANAudit** para su arranque en cada inicio del sistema operativo. Por ello, se recomienda la instalación y el uso de **LANAudit** en un sistema operativo recién instalado y dedicado a esta tarea. 
+La instalación de la función de auto-arranque `enable_autostart.sh` configura **LANAudit** para su arranque en cada inicio del sistema operativo. Por ello, se recomienda la instalación y el uso de **LANAudit** en un sistema operativo recién instalado y dedicado a esta tarea. 
 
 No se debe instalar **LANAudit** en sistemas operativos Linux dedicados a tareas de escritorio o servidores. Se recomienda el uso dedicado de un sistema operativo/máquina para el uso de **LANAudit**
 
@@ -18,7 +18,7 @@ No se debe instalar **LANAudit** en sistemas operativos Linux dedicados a tareas
 ---
 
 ## REQUERIMIENTOS
-- KALI Linux 2021.1 Release (https://www.kali.org/downloads/)
+- KALI Linux 2021.1 o 2021.2 Release (https://www.kali.org/downloads/)
 
 Versiones de 32 y 64 bits para funcionalidades completas y versiones ARM para funcionalidades limitadas: sin escáner de vulnerabilidades WEB.
 
@@ -33,7 +33,7 @@ Versiones de 32 y 64 bits para funcionalidades completas y versiones ARM para fu
 
 El proceso de instalación para versiones de 32 y 64 bits es:
 
-- Se descarga y ejecuta **KALI Linux 2021.1**
+- Se descarga y ejecuta **KALI Linux 2021.1** o **KALI Linux 2021.2**
 - Se hace login y desde una ventana de **shell** se cambia a usuario **root** mediante `sudo su`
 - En shell de **root** se apunta al directorio **/opt** mediante `cd /opt`
 - Se clona el repositorio del proyecto mediante `git clone https://github.com/israelt/lanaudit.git`
@@ -146,7 +146,7 @@ IPRange5 = 172.26.10.1/255.255.255.0
 ---
 
 ## AUTO-ARRANQUE
-La instalación de la función de auto-arranque `enable_autostart.sh` elimina cualquier otro servicio arrancado mediante el servicio `rc.local` y configura **LANAudit** para su arranque en cada inicio del sistema operativo. Por ello, se recomienda la instalación y el uso de **LANAudit** en un sistema operativo recién instalado y dedicado a esta tarea.
+La instalación de la función de auto-arranque `enable_autostart.sh` añade **LANAudit** para su arranque en cada inicio del sistema operativo mediante la configuración del `init.d` del sistema. Por ello, se recomienda la instalación y el uso de **LANAudit** en un sistema operativo dedicado a la tarea de auditorías de seguridad. 
 
 Para instalar la función de auto-arranque se debe ejecutar con permisos de **root** el siguiente script en el subdirectorio de instalación de **LANAudit**:
 
