@@ -33,7 +33,7 @@ Versiones x86 para funcionalidades completas y versiones ARM para funcionalidade
 
 El proceso de instalación para versiones x86 es:
 
-- Se descarga y ejecuta **KALI Linux 2021.1** o **KALI Linux 2021.2** (preferiblemente versiones de 64bis)
+- Se descarga y ejecuta **KALI Linux 2021.1** o **KALI Linux 2021.2** (preferiblemente versiones de 64bits)
 - Se hace login y desde una ventana de **shell** se cambia a usuario **root** mediante `sudo su`
 - En shell de **root** se apunta al directorio **/opt** mediante `cd /opt`
 - Se clona el repositorio del proyecto mediante `git clone https://github.com/israelt/lanaudit.git`
@@ -152,7 +152,7 @@ Para instalar la función de auto-arranque se debe ejecutar con permisos de **ro
 
 `/opt/lanaudit/install/enable_autostart.sh`
 
-Si reiniciamos el sistema operativo tras esta instalación se iniciará de forma automática el escáner con los parámetros definidos en el fichero `lanaudit.ini` 
+Si se reinicia el sistema operativo tras esta instalación se iniciará de forma automática el escáner con los parámetros definidos en el fichero `lanaudit.ini` 
 
 
 Para desinstalar la función de auto-arranque se debe ejecutar con permisos de **root** el siguiente script en el subdirectorio de instalación de **LANAudit**:
