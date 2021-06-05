@@ -234,7 +234,7 @@ def auditScan(ip, mask):
             print('SCAN GUEST: El host ' + i + ' NO tiene cuenta de invitado activa en Windows')
             logging.info('SCAN GUEST: El host ' + i + ' NO tiene cuenta de invitado activa en Windows')
     # Escaneando de servicios web
-    if '64' in (os.uname()[2]).str():
+    if '64' in os.uname()[2]:
         hosts.clear()
         hosts = gethosts(dbname, interface, '80', 'tcp')
         if len(hosts) == 0:
