@@ -263,7 +263,7 @@ def auditScan(ip, mask):
         print('SCAN WEB: El sistema hardware utilizado no soporta el escaner web')
         logging.info('SCAN WEB: El sistema hardware utilizado no soporta el escaner web')
     # Escaneo por fuerza bruta
-    if brute == 1:
+    if brute == '1':
         services = ['21', '22', '23', '389', '445', '3306', '5900']
         for i in services:
             hosts.clear()
